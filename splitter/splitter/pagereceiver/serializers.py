@@ -17,6 +17,10 @@ class GroupSerializer(serializers.HyperlinkedModelSerializer):
 class FileSerializer(serializers.ModelSerializer):
 	class Meta:
 		model = File
+		# fields = ('file',)
 		fields = "__all__"
 		
-		
+class PhraseSerializer(serializers.ModelSerializer):
+	class Meta:
+		model = File
+		fields = "__all__"

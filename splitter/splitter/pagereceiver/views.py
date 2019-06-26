@@ -11,6 +11,8 @@ from .serializers import FileSerializer, UserSerializer, GroupSerializer
 from .models import File
 from rest_framework.decorators import detail_route
 
+from .test import test1
+
 
 # class FileUploadView(viewsets.ModelViewSet):
 # 	parser_class = (FileUploadParser,)
@@ -45,9 +47,18 @@ class FileUploadView(viewsets.ModelViewSet):
 
 		if file_serializer.is_valid():
 			file_serializer.save()
+			print("inside view")
+			test1("hello")
+			# f = open("text.txt", "a")
+			# f.write("Now the file has more content! ")
+			# f.close()
+
 			return Response(file_serializer.data, status=status.HTTP_201_CREATED)
 		else:
 			return Response(file_serializer.errors, status=status.HTTP_400_BAD_REQUEST)
+
+			
+
 
 class UserViewSet(viewsets.ModelViewSet):
 	"""
