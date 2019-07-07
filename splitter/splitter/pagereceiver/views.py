@@ -42,13 +42,12 @@ class FileUploadView(viewsets.ModelViewSet):
 	# 	product = Product.objects.create(image=file)
 		
 	def post(self, request, *args, **kwargs):
-
+		
 		file_serializer = FileSerializer(data=request.data)
 
 		if file_serializer.is_valid():
 			file_serializer.save()
-			print("inside view")
-			test1("hello")
+			test1("inside view")
 			# f = open("text.txt", "a")
 			# f.write("Now the file has more content! ")
 			# f.close()

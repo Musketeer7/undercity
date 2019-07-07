@@ -9,6 +9,10 @@ verify_ssl = true
 django = "*"
 djangorestframework = "*"
 django-cors-headers = "*"
+opencv-python = "*"
+pillow = "*"
+pypng = "*"
+matplotlib = "*"
 
 [requires]
 python_version = "3.6"

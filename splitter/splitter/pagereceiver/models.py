@@ -1,6 +1,8 @@
 from django.db import models
 from django.utils import timezone
-
+from .helper.splitter import imageSplitter
+from .helper.splitter2 import imageSplitter2
+from .test import test1
 
 class File(models.Model):
 
@@ -9,22 +11,38 @@ class File(models.Model):
 	created_at     = models.DateTimeField(editable=False, default=timezone.now)
 	modified_at    = models.DateTimeField(default=timezone.now)
 
+
 	def save(self, *args, **kwargs):
 		''' On save, update timestamps '''
 		if not self.id:
 			self.created_at = timezone.now()
+
 		self.modified_at = timezone.now()
-		return super(User, self).save(*args, **kwargs)
+		
+		x = super(File, self).save(*args, **kwargs)
+
+		print("========")
+		print(self.file.name)
+		print(type(self.file))
+		print(type(self))
+		print("========")
+		imageSplitter2(self)
+
+		return x
 	def __str__(self):
 		return self.file.name
+
 		
+
+
+
 
 class Phrase(models.Model):
 
 	# is_deleted = models.BooleanField(default=False, blank=True)
 
 	file = models.FileField(blank=False, null=False)
-	ocr = models.CharField(max_length=30, null=True)
+	ocr = models.CharField(max_length=30, null=True, blank=True)
 	first_catch = models.CharField(max_length=30, null=True)
 	# second_catch = models.CharField(max_length=30, null=True)
 

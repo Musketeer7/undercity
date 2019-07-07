@@ -1,3 +1,0 @@
-server: 37.32.127.124:33810
-user: sabingroup\erp
-password: 41624422
