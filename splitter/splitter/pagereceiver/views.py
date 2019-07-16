@@ -66,6 +66,11 @@ class UserViewSet(viewsets.ModelViewSet):
 	queryset = User.objects.all().order_by('-date_joined')
 	serializer_class = UserSerializer
 
+	def detail(request, user_id):
+		return HttpResponse("You're looking at User %s." % user_id)
+
+
+
 
 class GroupViewSet(viewsets.ModelViewSet):
 	"""

@@ -35,13 +35,11 @@ class File(models.Model):
 		
 
 
-
-
 class Phrase(models.Model):
 
 	# is_deleted = models.BooleanField(default=False, blank=True)
 
-	file = models.FileField(blank=False, null=False)
+	file = models.FileField()
 	ocr = models.CharField(max_length=30, null=True, blank=True)
 	first_catch = models.CharField(max_length=30, null=True)
 	# second_catch = models.CharField(max_length=30, null=True)
@@ -50,6 +48,8 @@ class Phrase(models.Model):
 	modified_at    = models.DateTimeField(default=timezone.now)
 
 	page = models.ForeignKey(File, on_delete=models.CASCADE)
+
+	sequence = models.IntegerField(blank=False, null=False, default=0)
 
 	def save(self, *args, **kwargs):
 		''' On save, update timestamps '''
@@ -60,3 +60,8 @@ class Phrase(models.Model):
 		
 	class Meta:
 		ordering = ['created_at']
+
+
+
+
+

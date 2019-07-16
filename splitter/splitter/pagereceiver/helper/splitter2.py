@@ -187,7 +187,7 @@ def imageSplitter2(f):
 			storage = DefaultStorage()
 			s = storage.open(file_path2, mode='rb')
 			print(type(s))
-			new_c = Phrase.objects.create(file=s, page=f, ocr="")
+			new_c = Phrase.objects.create(file=s, page=f, sequence=phrasecount, ocr="")
 			# phrase = Phrase(c2,f).save()
 			# phrase.file.save(f'{f.file.name}{phrasecount}', Image.fromarray(c2))
 

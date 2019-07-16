@@ -4,6 +4,7 @@ from .models import File
 
 
 class UserSerializer(serializers.HyperlinkedModelSerializer):
+	users = serializers.HyperlinkedRelatedField(many=True, view_name='user-detail', read_only=True)
 	class Meta:
 		model = User
 		fields = ('url', 'username', 'email', 'groups')

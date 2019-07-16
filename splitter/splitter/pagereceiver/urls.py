@@ -1,6 +1,8 @@
 from django.urls import path
-from .views import *
+from . import views
 
 urlpatterns = [
-	path('', FileUploadView.as_view({'get': 'list'}))
+	path('', views.FileUploadView.as_view({'get': 'list'})),
+	# path('<int:user_id>/', views.UserViewSet.detail, name='detail'),
+	path('users/<int:pk>/',	views.UserViewSet,	name='user-detail')
 ]
