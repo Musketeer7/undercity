@@ -7,8 +7,8 @@ from rest_framework.response import Response
 from rest_framework.views import APIView
 from rest_framework import status
 from rest_framework import viewsets
-from .serializers import FileSerializer, UserSerializer, GroupSerializer
-from .models import File
+from .serializers import FileSerializer, UserSerializer, GroupSerializer, KnownSerializer
+from .models import File, Known
 from rest_framework.decorators import detail_route
 
 from .test import test1
@@ -71,10 +71,18 @@ class UserViewSet(viewsets.ModelViewSet):
 
 
 
-
 class GroupViewSet(viewsets.ModelViewSet):
 	"""
 	API endpoint that allows groups to be viewed or edited.
 	"""
 	queryset = Group.objects.all()
-	serializer_class = GroupSerializer			
+	serializer_class = GroupSerializer
+
+
+class KnownViewSet(viewsets.ModelViewSet):
+	"""
+	API endpoint that allows groups to be viewed or edited.
+	"""
+	queryset = Known.objects.all()
+	serializer_class = KnownSerializer	
+

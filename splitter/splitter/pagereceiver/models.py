@@ -29,6 +29,7 @@ class File(models.Model):
 		imageSplitter2(self)
 
 		return x
+
 	def __str__(self):
 		return self.file.name
 
@@ -64,4 +65,78 @@ class Phrase(models.Model):
 
 
 
+class Known(models.Model):
+
+	# is_deleted = models.BooleanField(default=False, blank=True)
+
+	img = models.FileField(blank=False, null=False)
+	text = models.CharField(max_length=30, null=True, blank=True)
+	# second_catch = models.CharField(max_length=30, null=True)
+
+	created_at     = models.DateTimeField(editable=False, default=timezone.now)
+	modified_at    = models.DateTimeField(default=timezone.now)
+
+
+	def save(self, *args, **kwargs):
+		''' On save, update timestamps '''
+		if not self.id:
+			self.created_at = timezone.now()
+		self.modified_at = timezone.now()
+		return super(Phrase, self).save(*args, **kwargs)
+		
+	class Meta:
+		ordering = ['created_at']
+
+
+class KnownRepo(models.Model):
+
+	file = models.FileField(blank=False, null=False)
+
+	created_at     = models.DateTimeField(editable=False, default=timezone.now)
+	modified_at    = models.DateTimeField(default=timezone.now)	
+
+	def save(self, *args, **kwargs):
+		''' On save, update timestamps '''
+		if not self.id:
+			self.created_at = timezone.now()
+
+		self.modified_at = timezone.now()
+		
+		x = super(KnownRepo, self).save(*args, **kwargs)
+
+		print("========")
+		print(self.file.name)
+		print(type(self.file))
+		print(type(self))
+		print("========")
+		# imageSplitter2(self)
+
+		return x
+		
+
+	class Meta:
+		ordering = ['created_at']
+
+
+class Captcha(models.Model):
+
+	# is_deleted = models.BooleanField(default=False, blank=True)
+
+	phrase = Phrase()
+	known = Known()
+
+	# second_catch = models.CharField(max_length=30, null=True)
+
+	created_at     = models.DateTimeField(editable=False, default=timezone.now)
+	modified_at    = models.DateTimeField(default=timezone.now)
+
+	def save(self, *args, **kwargs):
+		''' On save, update timestamps '''
+		if not self.id:
+			self.created_at = timezone.now()
+		self.modified_at = timezone.now()
+		return super(Phrase, self).save(*args, **kwargs)
+		
+	class Meta:
+		ordering = ['created_at']
 

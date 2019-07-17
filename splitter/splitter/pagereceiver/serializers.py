@@ -1,6 +1,6 @@
 from django.contrib.auth.models import User, Group
 from rest_framework import serializers
-from .models import File
+from .models import File, Known, KnownRepo
 
 
 class UserSerializer(serializers.HyperlinkedModelSerializer):
@@ -24,4 +24,9 @@ class FileSerializer(serializers.ModelSerializer):
 class PhraseSerializer(serializers.ModelSerializer):
 	class Meta:
 		model = File
+		fields = "__all__"
+
+class KnownSerializer(serializers.ModelSerializer):
+	class Meta:
+		model = KnownRepo
 		fields = "__all__"
