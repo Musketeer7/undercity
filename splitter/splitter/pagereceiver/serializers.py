@@ -27,6 +27,19 @@ class PhraseSerializer(serializers.ModelSerializer):
 		fields = "__all__"
 
 class KnownSerializer(serializers.ModelSerializer):
+
+	img = serializers.FileField(read_only=True)
+	text = serializers.CharField(read_only=True)
+
+	class Meta:
+		model = Known
+		fields = "__all__"
+
+	def create(self, validated_data):
+		return Known.objects.create(**validated_data)
+
+
+class KnownRepoSerializer(serializers.ModelSerializer):
 	class Meta:
 		model = KnownRepo
 		fields = "__all__"

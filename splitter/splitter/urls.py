@@ -26,6 +26,7 @@ router = routers.DefaultRouter()
 router.register(r'users', views.UserViewSet)
 router.register(r'groups', views.GroupViewSet)
 router.register(r'known', views.KnownViewSet)
+router.register(r'knownRepo', views.KnownRepoViewSet)
 
 urlpatterns = [
 	path('', include(router.urls)),

@@ -7,9 +7,8 @@ from rest_framework.response import Response
 from rest_framework.views import APIView
 from rest_framework import status
 from rest_framework import viewsets
-from .serializers import FileSerializer, UserSerializer, GroupSerializer, KnownSerializer
-from .models import File, Known
-from rest_framework.decorators import detail_route
+from .serializers import FileSerializer, UserSerializer, GroupSerializer, KnownSerializer, KnownRepoSerializer
+from .models import File, Known, KnownRepo
 
 from .test import test1
 
@@ -85,4 +84,12 @@ class KnownViewSet(viewsets.ModelViewSet):
 	"""
 	queryset = Known.objects.all()
 	serializer_class = KnownSerializer	
+
+
+class KnownRepoViewSet(viewsets.ModelViewSet):
+	"""
+	API endpoint that allows groups to be viewed or edited.
+	"""
+	queryset = KnownRepo.objects.all()
+	serializer_class = KnownRepoSerializer	
 

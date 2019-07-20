@@ -2,6 +2,7 @@ from django.db import models
 from django.utils import timezone
 from .helper.splitter import imageSplitter
 from .helper.splitter2 import imageSplitter2
+from .helper.wordsplitter import wordsplitter
 from .test import test1
 
 class File(models.Model):
@@ -82,7 +83,7 @@ class Known(models.Model):
 		if not self.id:
 			self.created_at = timezone.now()
 		self.modified_at = timezone.now()
-		return super(Phrase, self).save(*args, **kwargs)
+		return super(Known, self).save(*args, **kwargs)
 		
 	class Meta:
 		ordering = ['created_at']
@@ -110,6 +111,7 @@ class KnownRepo(models.Model):
 		print(type(self))
 		print("========")
 		# imageSplitter2(self)
+		wordsplitter(self)
 
 		return x
 		
