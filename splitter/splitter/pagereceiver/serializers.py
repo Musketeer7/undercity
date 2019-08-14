@@ -4,10 +4,11 @@ from .models import File, Known, KnownRepo
 
 
 class UserSerializer(serializers.HyperlinkedModelSerializer):
-	users = serializers.HyperlinkedRelatedField(many=True, view_name='user-detail', read_only=True)
+	# users = serializers.HyperlinkedRelatedField(many=True, view_name='user-detail', read_only=True)
 	class Meta:
 		model = User
 		fields = ('url', 'username', 'email', 'groups')
+		# fields = "__all__"
 
 
 class GroupSerializer(serializers.HyperlinkedModelSerializer):

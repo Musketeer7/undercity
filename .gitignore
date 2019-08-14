@@ -8,3 +8,5 @@ splitter/cropped2\.jpg
 splitter/splitter2\.png
 
 splitter/temp\.jpg
+
+splitter/db\.sqlite3

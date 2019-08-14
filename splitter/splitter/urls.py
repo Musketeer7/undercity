@@ -19,6 +19,7 @@ from django.conf import settings
 from django.conf.urls.static import static
 from rest_framework import routers
 from splitter.pagereceiver import views
+from splitter.captcha.views import CaptchaView
 
 router = routers.DefaultRouter()
 # router.register(r'upload', views.FileUploadView.as_view({'get': 'list'}))
@@ -27,6 +28,8 @@ router.register(r'users', views.UserViewSet)
 router.register(r'groups', views.GroupViewSet)
 router.register(r'known', views.KnownViewSet)
 router.register(r'knownRepo', views.KnownRepoViewSet)
+router.register(r'captchas', CaptchaView)
+
 
 urlpatterns = [
 	path('', include(router.urls)),

@@ -26,6 +26,7 @@ class File(models.Model):
 		print(self.file.name)
 		print(type(self.file))
 		print(type(self))
+		print(type(x))
 		print("========")
 		imageSplitter2(self)
 
