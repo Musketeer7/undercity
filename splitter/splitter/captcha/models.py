@@ -53,7 +53,7 @@ class Captcha(models.Model):
 			print(pk1)
 			t1 = Known.objects.get(pk=pk1)
 			print(type(t1))
-			if t1:
+			if (t1):
 				random_known = t1
 				break
 		print(type(random_known))
@@ -64,7 +64,7 @@ class Captcha(models.Model):
 		while True:
 			pk2 = random.randint(1, max_id)
 			t2 = Phrase.objects.get(pk=pk2)
-			if t2:
+			if (t2 and t2.first_catch != ""):
 				random_unknown = t2
 				break
 		print(max_id2)

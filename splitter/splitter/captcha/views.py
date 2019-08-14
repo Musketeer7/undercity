@@ -3,7 +3,10 @@ from rest_framework.decorators import api_view
 from rest_framework.response import Response
 from .models import Captcha
 from rest_framework import viewsets
-from .serializers import CaptchaSerializer
+from .serializers import CaptchaSerializer, CheckSerializer
+from django.views import View
+from django.http import HttpResponse
+import json
 
 
 # @api_view(['GET', 'POST'])
@@ -71,3 +74,41 @@ class CaptchaView(viewsets.ModelViewSet):
 	# 		return Response(captcha_serializer.data, status=status.HTTP_201_CREATED)
 	# 	else:
 	# 		return Response(captcha_serializer.errors, status=status.HTTP_400_BAD_REQUEST)
+
+@api_view(['GET', 'PUT'])
+def Test(request):
+	if request.method == 'PUT':
+		body_unicode = request.body.decode('utf-8')
+		body = json.loads(body_unicode)
+		content = body['captchaId']
+		print(content)
+		return Response(content,status=200)
+
+@api_view(['GET', 'PUT'])
+def CheckView(request):
+
+	if request.method == 'PUT':
+		body_unicode = request.body.decode('utf-8')
+		body = json.loads(body_unicode)
+		captcha = Captcha.objects.get(id=body['captchaId'])
+		print(captcha.known)
+		print(captcha.unknown)
+		print(captcha.unknown.first_catch)
+		unknownInput = body['unknownInput']
+		print(unknownInput)
+		knownInput = body['knownInput']
+		print(knownInput)
+		print("equals")
+		print(captcha.known.text)
+
+		if (knownInput == captcha.known.text):
+			captcha.unknown.first_catch = unknownInput
+			print(type(captcha.unknown))
+			captcha.unknown.save()
+			return HttpResponse(status=200)
+
+
+		return HttpResponse(status=475)
+
+	if request.method == 'GET':
+		return HttpResponse(status=201)

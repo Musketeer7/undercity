@@ -7,3 +7,8 @@ class CaptchaSerializer(serializers.ModelSerializer):
 		fields = ('id', 'created_at', 'modified_at', 'known', 'unknown',)
 		# fields = "__all__"
 
+class CheckSerializer(serializers.ModelSerializer):
+	class Meta:
+		model = Captcha
+		fields = ('captchaId', 'knownInput', 'unknownInput',)
+		# fields = "__all__"
