@@ -5,6 +5,8 @@ from django.contrib.auth.models import User, Group
 from rest_framework.parsers import FileUploadParser
 from rest_framework.response import Response
 from rest_framework.views import APIView
+from rest_framework.authentication import BasicAuthentication
+from rest_framework.permissions import IsAuthenticated
 from rest_framework import status
 from rest_framework import viewsets
 from .serializers import FileSerializer, UserSerializer, GroupSerializer, KnownSerializer, KnownRepoSerializer
@@ -29,6 +31,8 @@ from .test import test1
 # 			return Response(file_serializer.errors, status=status.HTTP_400_BAD_REQUEST)
 
 class FileUploadView(viewsets.ModelViewSet):
+	authentication_classes = [BasicAuthentication]
+	permission_classes = [IsAuthenticated]
 	queryset = File.objects.all()
 	serializer_class = FileSerializer
 
@@ -62,6 +66,8 @@ class UserViewSet(viewsets.ModelViewSet):
 	"""
 	API endpoint that allows users to be viewed or edited.
 	"""
+	authentication_classes = [BasicAuthentication]
+	permission_classes = [IsAuthenticated]	
 	queryset = User.objects.all().order_by('-date_joined')
 	serializer_class = UserSerializer
 
@@ -74,22 +80,28 @@ class GroupViewSet(viewsets.ModelViewSet):
 	"""
 	API endpoint that allows groups to be viewed or edited.
 	"""
+	authentication_classes = [BasicAuthentication]
+	permission_classes = [IsAuthenticated]	
 	queryset = Group.objects.all()
 	serializer_class = GroupSerializer
 
 
 class KnownViewSet(viewsets.ModelViewSet):
 	"""
-	API endpoint that allows groups to be viewed or edited.
+	API endpoint that allows Knowns to be viewed or edited.
 	"""
+	authentication_classes = [BasicAuthentication]
+	permission_classes = [IsAuthenticated]	
 	queryset = Known.objects.all()
 	serializer_class = KnownSerializer	
 
 
 class KnownRepoViewSet(viewsets.ModelViewSet):
 	"""
-	API endpoint that allows groups to be viewed or edited.
+	API endpoint that allows known repos to be viewed or edited.
 	"""
+	authentication_classes = [BasicAuthentication]
+	permission_classes = [IsAuthenticated]	
 	queryset = KnownRepo.objects.all()
 	serializer_class = KnownRepoSerializer	
 

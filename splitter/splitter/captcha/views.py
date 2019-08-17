@@ -1,5 +1,8 @@
 from rest_framework import status
 from rest_framework.decorators import api_view
+from rest_framework.authentication import BasicAuthentication
+from rest_framework.permissions import IsAuthenticated
+from rest_framework.decorators import authentication_classes, permission_classes
 from rest_framework.response import Response
 from .models import Captcha
 from rest_framework import viewsets
@@ -28,6 +31,8 @@ import json
 
 
 class CaptchaView(viewsets.ModelViewSet):
+	authentication_classes = [BasicAuthentication]
+	permission_classes = [IsAuthenticated]	
 	queryset = Captcha.objects.all()
 	serializer_class = CaptchaSerializer
 
@@ -76,6 +81,8 @@ class CaptchaView(viewsets.ModelViewSet):
 	# 		return Response(captcha_serializer.errors, status=status.HTTP_400_BAD_REQUEST)
 
 @api_view(['GET', 'PUT'])
+@authentication_classes([BasicAuthentication])
+@permission_classes([IsAuthenticated])
 def Test(request):
 	if request.method == 'PUT':
 		body_unicode = request.body.decode('utf-8')
@@ -85,6 +92,8 @@ def Test(request):
 		return Response(content,status=200)
 
 @api_view(['GET', 'PUT'])
+@authentication_classes([BasicAuthentication])
+@permission_classes([IsAuthenticated])
 def CheckView(request):
 
 	if request.method == 'PUT':
