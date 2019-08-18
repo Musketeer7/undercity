@@ -25,7 +25,7 @@ SECRET_KEY = '1=m2#!_d$z$!xw2j6%r=hx0aywz+m51dskmbszfn7$+uee**(k'
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = ['192.168.200.98']
 
 
 # Application definition
@@ -40,9 +40,11 @@ INSTALLED_APPS = [
 	'django.contrib.sessions',
 	'django.contrib.messages',
 	'django.contrib.staticfiles',
+	'corsheaders',
 ]
 
 MIDDLEWARE = [
+	'corsheaders.middleware.CorsMiddleware',
 	'django.middleware.security.SecurityMiddleware',
 	'django.contrib.sessions.middleware.SessionMiddleware',
 	'django.middleware.common.CommonMiddleware',
@@ -138,3 +140,6 @@ REST_FRAMEWORK = {
 
 MEDIA_URL =  '/media/'
 MEDIA_ROOT = os.path.join(BASE_DIR, "media")
+
+#CORS
+CORS_ORIGIN_ALLOW_ALL = True
